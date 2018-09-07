@@ -6,13 +6,18 @@
     <title>Strasbourg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <script async src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row" style="margin: 30px;">
+        <div class="row text-white" style="margin: 30px;">
             <div class="col-md-12" style="text-align: center;">
                 <h1>Etat en direct des parkings de Strasbourg</h1>
+                <div class="form-group" style="margin-top: 50px;">
+                    <label for="recherche" style="float: left;">Recherche: </label>
+                    <input type="text" class="form-control" id="recherche" placeholder="Nom du parking">
+                </div>
             </div>
         </div>
         <div class="row">
@@ -25,7 +30,7 @@
                 foreach($etas->s as $eta ) {
                     if ($eta->id === $parking->id){
         ?>
-            <div class="col-md-4">
+            <div class="col-md-4 parking">
                 <div class="card <?= "border-" . $css[intval(substr($eta->ds, -1)-1)] ?> mb-3">
                     <h3 class="card-header text-white <?= "bg-" . $css[intval(substr($eta->ds, -1)-1)] ?>"><?= strtoupper($status[intval(substr($eta->ds, -1)-1)]) ?></h3>
                     <div class="card-body">
@@ -48,6 +53,28 @@
 
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Par <a target="_BLANK" href="http://madriax.fr">Alexandre Duvois</a></span>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        document.getElementById('recherche').addEventListener('keyup', function(e) {
+        var recherche = this.value.toLowerCase();
+        var documents = document.querySelectorAll('.parking');
+        
+        Array.prototype.forEach.call(documents, function(document) {
+            // On a bien trouvé les termes de recherche.
+            if (document.innerHTML.toLowerCase().indexOf(recherche) > -1) {
+            document.style.display = 'block';
+            } else {
+            document.style.display = 'none';
+            }
+        });
+        });
+    </script>
 
 </body>
 </html>
