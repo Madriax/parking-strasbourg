@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h4 class="card-title"><?= $parking->ln; ?></h4>
                         <div class="progress bg-danger" style="height: 20px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo ($eta->df/($eta->dt + $eta->df)*100); ?>%"><?= $eta->df . ' / ' . $eta->dt ?></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo ($eta->df/$eta->dt)*100; ?>%"><?= $eta->df . ' / ' . $eta->dt ?></div>
                         </div>
                     </div>
                     <div id="map" class="col-md-12"></div>
