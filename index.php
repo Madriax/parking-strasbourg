@@ -35,12 +35,15 @@
                     <h3 class="card-header text-white <?= "bg-" . $css[intval(substr($eta->ds, -1)-1)] ?>"><?= strtoupper($status[intval(substr($eta->ds, -1)-1)]) ?></h3>
                     <div class="card-body">
                         <h4 class="card-title"><?= $parking->ln; ?></h4>
-                        <div class="progress bg-danger" style="height: 20px;">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo ($eta->df/$eta->dt)*100; ?>%"><?= $eta->df . ' / ' . $eta->dt ?></div>
-                        </div>
                     </div>
                     <div id="map" class="col-md-12"></div>
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Places disponnibles:
+                            <div class="progress bg-danger" style="height: 20px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo ($eta->df/$eta->dt)*100; ?>%"><?= $eta->df . ' / ' . $eta->dt ?></div>
+                            </div>
+                        </li>
                         <li class="list-group-item"><?php if ($parking->price_fr) { echo $parking->price_fr; } else { echo "Aucune donnée de paiement disponnible"; } ?></li>
                     </ul>
                     <div class="card-body">
