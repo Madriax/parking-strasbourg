@@ -20,6 +20,11 @@
                 </div>
             </div>
         </div>
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4 class="alert-heading">Information trafic</h4>
+            <ul class="mb-0" id="info-trafic"></ul>
+        </div>
         <div class="row">
         <?php
             $status = ['ouvert', 'complet', 'indisponible', 'fermé'];
@@ -59,23 +64,45 @@
 
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">Par <a target="_BLANK" href="http://madriax.fr">Alexandre Duvois</a></span>
+            <span class="text-muted">Par <a target="_BLANK" href="http://madriax.fr">Alexandre Duvois</a> | Donnée issue de <a href="https://www.strasbourg.eu/open-data-donnees" target="_BLANK" title="OpenData ville de Strasbourg">Strasbourg OpenData</a></span>
         </div>
     </footer>
 
     <script type="text/javascript">
-        document.getElementById('recherche').addEventListener('keyup', function(e) {
-        var recherche = this.value.toLowerCase();
-        var documents = document.querySelectorAll('.parking');
-        
-        Array.prototype.forEach.call(documents, function(document) {
-            // On a bien trouvé les termes de recherche.
-            if (document.innerHTML.toLowerCase().indexOf(recherche) > -1) {
-            document.style.display = 'block';
-            } else {
-            document.style.display = 'none';
+
+        function getTraficInfo() {
+            const ajaxRequest = new XMLHttpRequest();
+            ajaxRequest.open("GET", "handler.php");
+
+            ajaxRequest.onload = () => {
+                result = JSON.parse(ajaxRequest.responseText);
+                for (a in result.s ) {
+                    if (result.s[a].ds != "type_manifestation" && result.s[a].ds != "type_travaux") {
+                        document.getElementById('info-trafic').innerHTML = '<li>Attention ' + result.s[a].dt + ' : ' + result.s[a].dp + '</li>';
+                    }
+                }
             }
-        });
+            ajaxRequest.send();
+        }
+
+        getTraficInfo();
+        var timer_thread = setInterval(() => {
+            getTraficInfo()
+        }, 90000);
+
+
+        document.getElementById('recherche').addEventListener('keyup', function(e) {
+            var recherche = this.value.toLowerCase();
+            var documents = document.querySelectorAll('.parking');
+            
+            Array.prototype.forEach.call(documents, function(document) {
+                // On a bien trouvé les termes de recherche.
+                if (document.innerHTML.toLowerCase().indexOf(recherche) > -1) {
+                    document.style.display = 'block';
+                } else {
+                    document.style.display = 'none';
+                }
+            });
         });
     </script>
 
