@@ -19,6 +19,7 @@
   <a href="#usage">Usage</a> •
   <a href="#contribution">Contribution</a> •
   <a href="#built-with">Built With</a> •
+  <a href="#members">Members</a> •
   <a href="#license">License</a>
 </p>
 
