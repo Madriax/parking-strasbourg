@@ -45,7 +45,7 @@ Visit the [website !](http://parking-strasbourg.herokuapp.com/)
 
 ## Built With
 
-* [Strasbourg Open Data](hhttps://www.strasbourg.eu/open-data-donnees) - API providing a lot of dynamic informations about Strasbourg
+* [Strasbourg Open Data](https://www.strasbourg.eu/open-data-donnees) - API providing a lot of dynamic informations about Strasbourg
 
 ## Members
 
